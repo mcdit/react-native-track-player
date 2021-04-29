@@ -276,7 +276,7 @@ public class RNTrackPlayer: RCTEventEmitter {
         print("Destroying player")
     }
     
-    @objc(updateOptions:resolver:rejecter:)
+  @objc(updateOptions:resolver:rejecter:)
     public func update(options: [String: Any], resolve: RCTPromiseResolveBlock, reject: RCTPromiseRejectBlock) {
 
         var capabilitiesStr = options["capabilities"] as? [String] ?? []
@@ -293,8 +293,15 @@ public class RNTrackPlayer: RCTEventEmitter {
         }
 
         player.enableRemoteCommands(remoteCommands)
-        
+
         resolve(NSNull())
+    }
+
+    //Add isServiceRunning method to detect if music service is running 
+    @objc(isServiceRunning:rejecter:)
+    public func isServiceRunning(resolve: RCTPromiseResolveBlock, reject: RCTPromiseRejectBlock) {
+        // TODO That is probably always true
+        resolve(player != nil)
     }
     
     @objc(add:before:resolver:rejecter:)
